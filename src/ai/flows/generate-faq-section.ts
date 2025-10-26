@@ -35,13 +35,8 @@ const prompt = ai.definePrompt({
   prompt: `You are an expert in generating FAQ sections for financial webpages, optimized for Google FAQ schema.
 
   Based on the primary keyword "{{{primaryKeyword}}}" and secondary keywords "{{{secondaryKeywords}}}", generate a FAQ section with 3-5 relevant questions and answers.
-  Format the output as a ready-to-publish HTML content.
-  Make sure to wrap each question within <dt> tag and answer within <dd> tag to follow FAQ schema. Exclude the <dl> tag.
-  Example:
-  <dt>Question 1</dt>
-  <dd>Answer 1</dd>
-  <dt>Question 2</dt>
-  <dd>Answer 2</dd>`,
+  Format the output as ready-to-publish HTML content.
+  You MUST wrap each question in a <dt> tag and each answer in a <dd> tag. Do NOT include the parent <dl> tag in your output.`,
 });
 
 const generateFaqSectionFlow = ai.defineFlow(
