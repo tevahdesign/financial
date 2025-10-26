@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input"
 import { Search, ArrowRight, CreditCard, Home as HomeIcon, Landmark, TrendingUp, PiggyBank, Shield, Car, Briefcase, ShoppingBag, Heart, FileText, Gift } from "lucide-react"
 import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card"
 import Image from 'next/image';
+import SpinWheelGame from '@/components/app/spin-wheel-game';
 
 const financialProducts = [
   { icon: CreditCard, title: "Credit Cards", description: "Compare travel, cash back & more" },
@@ -80,6 +81,15 @@ export default function Home() {
                 </Button>
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* Spin Wheel Section */}
+        <section className="py-16 bg-background">
+          <div className="container mx-auto px-4">
+            <h2 className="text-3xl font-bold font-headline text-center mb-4">Spin to Win!</h2>
+            <p className="text-lg text-muted-foreground text-center mb-10">Take a spin for a chance to win a special prize.</p>
+            <SpinWheelGame />
           </div>
         </section>
 
