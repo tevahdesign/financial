@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { AlertDialog, AlertDialogContent, AlertDialogHeader, AlertDialogTitle, AlertDialogDescription, AlertDialogFooter, AlertDialogAction } from '@/components/ui/alert-dialog';
 import { Gift } from 'lucide-react';
@@ -9,7 +9,7 @@ const segments = [
   { text: 'Financial Tip', color: '#60A5FA', prize: 'A penny saved is a penny earned!' },
   { text: 'Try Again', color: '#FBBF24', prize: 'Better luck next time!' },
   { text: 'Free E-Book', color: '#34D399', prize: 'You won a free e-book on budgeting!' },
-  { text: 'Try Again', color: '#F87171', prize: 'Better luck next time!' },
+  { text: '$10 Gift Card', color: '#34D399', prize: 'You won a $10 Gift Card!' },
   { text: '10% Off', color: '#A78BFA', prize: 'You won 10% off our premium services!' },
   { text: 'Try Again', color: '#FBBF24', prize: 'Better luck next time!' },
   { text: 'Free Consultation', color: '#60A5FA', prize: 'You won a free financial consultation!' },
@@ -21,23 +21,33 @@ const SpinWheelGame = () => {
   const [rotation, setRotation] = useState(0);
   const [result, setResult] = useState<string | null>(null);
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
   
   const spin = () => {
     if (spinning) return;
 
     setSpinning(true);
     const randomStop = Math.floor(Math.random() * 360) + 360 * 5; // Spin at least 5 times
-    setRotation(prev => prev + randomStop);
+    const newRotation = rotation + randomStop;
+    setRotation(newRotation);
 
     setTimeout(() => {
       setSpinning(false);
-      const finalRotation = (rotation + randomStop) % 360;
+      const finalRotation = newRotation % 360;
       const segmentAngle = 360 / segments.length;
-      const winningSegmentIndex = Math.floor((360 - finalRotation) / segmentAngle);
+      const winningSegmentIndex = Math.floor((360 - (finalRotation % 360) + (segmentAngle/2)) % 360 / segmentAngle);
       setResult(segments[winningSegmentIndex].prize);
       setDialogOpen(true);
     }, 4000); // Corresponds to the animation duration
   };
+
+  if (!isMounted) {
+      return null;
+  }
 
   return (
     <div className="flex flex-col items-center justify-center p-4 rounded-lg">
