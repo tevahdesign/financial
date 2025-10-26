@@ -1,3 +1,4 @@
+
 'use server';
 
 /**
@@ -54,7 +55,11 @@ const prompt = ai.definePrompt({
       *   Include actionable tips, ideas for calculators, or other interactive elements.
       *   Maintain a professional, authoritative, and trustworthy tone suitable for the finance industry.
 
-  3.  **Content Output**
+  3.  **Ad Integration**
+      *   Strategically insert multiple ad slots within the content. Use HTML comments like \`<!-- AD_SLOT_1 -->\`, \`<!-- AD_SLOT_2 -->\`, etc., as placeholders.
+      *   Place these slots at natural breaks in the content (e.g., after a few paragraphs, between sections) to maximize visibility without disrupting the reading experience. These placeholders will be used for fast-loading, asynchronous ad scripts.
+
+  4.  **Content Output**
       *   Provide ready-to-publish HTML content with all required headings, paragraphs, and tables.
       *   Do NOT include FAQ sections, CTAs, or disclaimers as they will be added in subsequent steps.
 
