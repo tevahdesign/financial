@@ -4,7 +4,7 @@ import { useState } from 'react';
 import AppHeader from '@/components/app/header';
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Search, ArrowRight, CreditCard, Home as HomeIcon, Landmark, TrendingUp, PiggyBank, Shield, Car, Briefcase, ShoppingBag, Heart, FileText, Gift } from "lucide-react"
+import { Search, ArrowRight, CreditCard, Home as HomeIcon, Landmark, TrendingUp, PiggyBank, Shield, Car, Briefcase, ShoppingBag, Heart, FileText, Gift, Lightbulb, BarChart, DollarSign } from "lucide-react"
 import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card"
 import Image from 'next/image';
 import SpinWheelGame from '@/components/app/spin-wheel-game';
@@ -41,6 +41,24 @@ const topPicks = [
     image: "/placeholder-invest.jpg",
     dataAiHint: "investment chart",
   },
+]
+
+const funFacts = [
+    {
+        icon: Lightbulb,
+        title: "The average American has over $7,000 in credit card debt.",
+        description: "Managing credit wisely is key to financial health.",
+    },
+    {
+        icon: BarChart,
+        title: "Only 57% of Americans have a retirement savings plan.",
+        description: "It's never too late to start planning for your future.",
+    },
+    {
+        icon: DollarSign,
+        title: "The S&P 500 has an average annual return of about 10% since its inception.",
+        description: "Investing in the stock market can be a powerful wealth-building tool.",
+    }
 ]
 
 const TempMessageLogo = () => (
@@ -115,8 +133,28 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Top Picks Section */}
+        {/* Fun Facts Section */}
         <section className="py-20">
+            <div className="container mx-auto px-4">
+                <h2 className="text-3xl font-bold font-headline text-center mb-10">Did You Know?</h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    {funFacts.map((fact, index) => (
+                        <Card key={index} className="border-0 bg-card p-6 flex items-start gap-4">
+                            <div className="bg-primary/10 p-3 rounded-full mt-1">
+                                <fact.icon className="h-6 w-6 text-primary" />
+                            </div>
+                            <div>
+                                <p className="font-bold text-lg">{fact.title}</p>
+                                <p className="text-muted-foreground text-sm mt-1">{fact.description}</p>
+                            </div>
+                        </Card>
+                    ))}
+                </div>
+            </div>
+        </section>
+
+        {/* Top Picks Section */}
+        <section className="py-20 bg-secondary/50">
             <div className="container mx-auto px-4">
                 <h2 className="text-3xl font-bold font-headline text-center mb-10">Our top picks for you</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -181,3 +219,5 @@ export default function Home() {
     </div>
   );
 }
+
+    
