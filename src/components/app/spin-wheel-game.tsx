@@ -42,7 +42,7 @@ const SpinWheelGame = () => {
       const winningSegmentIndex = Math.floor((360 - (finalRotation % 360) + (segmentAngle/2)) % 360 / segmentAngle);
       setResult(segments[winningSegmentIndex].prize);
       setDialogOpen(true);
-    }, 4000); // Corresponds to the animation duration
+    }, 10000); // Corresponds to the animation duration
   };
 
   if (!isMounted) {
@@ -53,7 +53,7 @@ const SpinWheelGame = () => {
     <div className="flex flex-col items-center justify-center p-4 rounded-lg">
       <div className="relative w-80 h-80 md:w-96 md:h-96">
         <div 
-          className="absolute w-full h-full rounded-full border-8 border-primary/80 shadow-2xl transition-transform duration-[4000ms] ease-out"
+          className="absolute w-full h-full rounded-full border-8 border-primary/80 shadow-2xl transition-transform duration-[10000ms] ease-out"
           style={{ 
             transform: `rotate(${rotation}deg)`,
             background: `conic-gradient(${segments.map((seg, i) => `${seg.color} ${i * (360 / segments.length)}deg, ${seg.color} ${(i + 1) * (360 / segments.length)}deg`).join(', ')})`
