@@ -4,7 +4,7 @@ import { useState } from 'react';
 import AppHeader from '@/components/app/header';
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Search, ArrowRight, CreditCard, Home as HomeIcon, Landmark, TrendingUp, PiggyBank, Shield, Car, Briefcase, ShoppingBag, Heart, FileText, Gift, Lightbulb, BarChart, DollarSign } from "lucide-react"
+import { Search, ArrowRight, CreditCard, Home as HomeIcon, Landmark, TrendingUp, PiggyBank, Shield, Car, Briefcase, ShoppingBag, Heart, FileText, Gift, Lightbulb, BarChart, DollarSign, School, Shuffle } from "lucide-react"
 import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card"
 import Image from 'next/image';
 import SpinWheelGame from '@/components/app/spin-wheel-game';
@@ -18,6 +18,10 @@ const financialProducts = [
   { icon: Shield, title: "Insurance", description: "Protect your family & assets" },
   { icon: Car, title: "Auto Loans", description: "Finance a new or used car" },
   { icon: Briefcase, title: "Small Business", description: "Business credit cards, loans" },
+  { icon: School, title: "Student Loans", description: "Refinance or consolidate student debt" },
+  { icon: Shuffle, title: "Debt Consolidation", description: "Combine debts into one payment" },
+  { icon: ShoppingBag, title: "Shopping Deals", description: "Find the best online deals" },
+  { icon: FileText, title: "Taxes", description: "Software and filing services" },
 ]
 
 const topPicks = [
@@ -58,6 +62,16 @@ const funFacts = [
         icon: DollarSign,
         title: "The S&P 500 has an average annual return of about 10% since its inception.",
         description: "Investing in the stock market can be a powerful wealth-building tool.",
+    },
+    {
+        icon: HomeIcon,
+        title: "The average 30-year fixed mortgage rate has fluctuated dramatically over the past decades.",
+        description: "Shopping for the best mortgage rate can save you thousands over the life of your loan."
+    },
+    {
+        icon: PiggyBank,
+        title: "Compound interest is the 8th wonder of the world.",
+        description: "Starting to save and invest early can make your money grow exponentially."
     }
 ]
 
@@ -219,5 +233,7 @@ export default function Home() {
     </div>
   );
 }
+
+    
 
     
