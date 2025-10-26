@@ -42,7 +42,7 @@ const topPicks = [
   },
 ]
 
-const NerdWalletLogo = () => (
+const TempMessageLogo = () => (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-primary">
       <path d="M12 2L2 7V17L12 22L22 17V7L12 2Z" fill="currentColor"/>
       <path d="M12 12L22 7" stroke="#222" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -137,10 +137,10 @@ export default function Home() {
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 text-sm">
                 <div className="col-span-2 lg:col-span-1">
                     <div className="flex items-center gap-2 mb-4">
-                        <NerdWalletLogo/>
-                        <h3 className="font-bold text-xl tracking-tighter">NerdWallet</h3>
+                        <TempMessageLogo/>
+                        <h3 className="font-bold text-xl tracking-tighter">Temp Message</h3>
                     </div>
-                    <p className="text-muted-foreground">&copy; {new Date().getFullYear()} NerdWallet, Inc. All Rights Reserved.</p>
+                    <p className="text-muted-foreground">&copy; {new Date().getFullYear()} Temp Message, Inc. All Rights Reserved.</p>
                 </div>
                 <div>
                     <h4 className="font-bold mb-4">Company</h4>

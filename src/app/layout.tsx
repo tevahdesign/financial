@@ -7,8 +7,8 @@ const inter = Inter({ subsets: ['latin'] });
 
 
 export const metadata: Metadata = {
-  title: 'NerdWallet | Make all the right money moves',
-  description: 'We\'ve gathered our best articles, tools and recommendations to help you reach your financial goals.',
+  title: 'Temp Message | Make all the right money moves',
+  description: 'We\'ve gathered our best articles, tools and recommendations to help you reach your financial goals in the US and other Tier 1 countries.',
 };
 
 export default function RootLayout({
@@ -17,7 +17,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en-US" className="dark">
       <body className={inter.className + " antialiased"}>
         {children}
         <Toaster />
