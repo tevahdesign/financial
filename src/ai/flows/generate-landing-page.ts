@@ -52,13 +52,14 @@ const generateLandingPageFlow = ai.defineFlow(
       ...input,
     });
 
-    // Step 4: Generate FAQ section
-    const faqSection = await generateFaqSection(input);
+    // Step 4: Generate FAQ section (HTML and JSON-LD)
+    const { faqHtml, faqJsonLd } = await generateFaqSection(input);
 
     // Step 5: Combine everything
-    const finalContent = `${contentWithCTAs.webpageContentWithCTAs}
+    const finalContent = `${faqJsonLd}
+      ${contentWithCTAs.webpageContentWithCTAs}
       <h2>Frequently Asked Questions</h2>
-      <dl>${faqSection.faqSection}</dl>`;
+      <dl>${faqHtml}</dl>`;
 
     return {
       webpageContent: finalContent,

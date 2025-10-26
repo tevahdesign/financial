@@ -18,8 +18,14 @@ const GenerateFaqSectionInputSchema = z.object({
 
 export type GenerateFaqSectionInput = z.infer<typeof GenerateFaqSectionInputSchema>;
 
+const FAQItemSchema = z.object({
+  question: z.string(),
+  answer: z.string(),
+});
+
 const GenerateFaqSectionOutputSchema = z.object({
-  faqSection: z.string().describe('The generated FAQ section, formatted for Google FAQ schema.'),
+  faqJsonLd: z.string().describe('The generated FAQ section as a JSON-LD script tag.'),
+  faqHtml: z.string().describe('The generated FAQ section as HTML using <dt> and <dd> tags.'),
 });
 
 export type GenerateFaqSectionOutput = z.infer<typeof GenerateFaqSectionOutputSchema>;
@@ -31,12 +37,15 @@ export async function generateFaqSection(input: GenerateFaqSectionInput): Promis
 const prompt = ai.definePrompt({
   name: 'generateFaqSectionPrompt',
   input: {schema: GenerateFaqSectionInputSchema},
-  output: {schema: GenerateFaqSectionOutputSchema},
+  output: {
+    schema: z.object({
+      faqs: z.array(FAQItemSchema),
+    }),
+  },
   prompt: `You are an expert in generating FAQ sections for financial webpages, optimized for Google FAQ schema.
 
-  Based on the primary keyword "{{{primaryKeyword}}}" and secondary keywords "{{{secondaryKeywords}}}", generate a FAQ section with 3-5 relevant questions and answers.
-  Format the output as ready-to-publish HTML content.
-  You MUST wrap each question in a <dt> tag and each answer in a <dd> tag. Do NOT include the parent <dl> tag in your output.`,
+  Based on the primary keyword "{{{primaryKeyword}}}" and secondary keywords "{{{secondaryKeywords}}}", generate 3-5 relevant questions and their corresponding answers.
+  `,
 });
 
 const generateFaqSectionFlow = ai.defineFlow(
@@ -47,6 +56,32 @@ const generateFaqSectionFlow = ai.defineFlow(
   },
   async input => {
     const {output} = await prompt(input);
-    return output!;
+    if (!output) {
+      throw new Error('Failed to generate FAQ content.');
+    }
+
+    const {faqs} = output;
+
+    const faqHtml = faqs.map(faq => `<dt>${faq.question}</dt><dd>${faq.answer}</dd>`).join('');
+
+    const jsonLd = {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faqs.map(faq => ({
+        '@type': 'Question',
+        name: faq.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: faq.answer,
+        },
+      })),
+    };
+
+    const faqJsonLd = `<script type="application/ld+json">${JSON.stringify(jsonLd)}</script>`;
+
+    return {
+      faqJsonLd,
+      faqHtml,
+    };
   }
 );
