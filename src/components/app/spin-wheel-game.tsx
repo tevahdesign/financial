@@ -9,7 +9,7 @@ const segments = [
   { text: 'Financial Tip', color: '#60A5FA', prize: 'A penny saved is a penny earned!' },
   { text: 'Try Again', color: '#FBBF24', prize: 'Better luck next time!' },
   { text: 'Free E-Book', color: '#34D399', prize: 'You won a free e-book on budgeting!' },
-  { text: '$10 Gift Card', color: '#34D399', prize: 'You won a $10 Gift Card!' },
+  { text: '$10 Gift Card', color: '#F87171', prize: 'You won a $10 Gift Card!' },
   { text: '10% Off', color: '#A78BFA', prize: 'You won 10% off our premium services!' },
   { text: 'Try Again', color: '#FBBF24', prize: 'Better luck next time!' },
   { text: 'Free Consultation', color: '#60A5FA', prize: 'You won a free financial consultation!' },
@@ -53,7 +53,7 @@ const SpinWheelGame = () => {
     <div className="flex flex-col items-center justify-center p-4 rounded-lg">
       <div className="relative w-80 h-80 md:w-96 md:h-96">
         <div 
-          className="absolute w-full h-full rounded-full border-8 border-primary transition-transform duration-[4000ms] ease-out"
+          className="absolute w-full h-full rounded-full border-8 border-primary/80 shadow-2xl transition-transform duration-[4000ms] ease-out"
           style={{ 
             transform: `rotate(${rotation}deg)`,
             background: `conic-gradient(${segments.map((seg, i) => `${seg.color} ${i * (360 / segments.length)}deg, ${seg.color} ${(i + 1) * (360 / segments.length)}deg`).join(', ')})`
@@ -71,18 +71,28 @@ const SpinWheelGame = () => {
                 transformOrigin: '0 100%',
               }}
             >
-               <span style={{ transform: 'rotate(-90deg) translate(-50%, -10px)', display: 'inline-block', width: '100px', textAlign: 'center' }}>
+               <span style={{ transform: 'rotate(-90deg) translate(-50%, -10px)', display: 'inline-block', width: '100px', textAlign: 'center', filter: 'drop-shadow(0 1px 1px rgba(0,0,0,0.5))' }}>
                 {segment.text}
               </span>
             </div>
           ))}
         </div>
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full bg-background flex items-center justify-center border-4 border-primary">
+        <div 
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-0 h-0"
+            style={{
+                borderLeft: '12px solid transparent',
+                borderRight: '12px solid transparent',
+                borderTop: '40px solid hsl(var(--primary))',
+                transform: 'translate(-50%, -100%)',
+                top: '0%',
+                filter: 'drop-shadow(0 2px 2px rgba(0,0,0,0.5))'
+            }}
+        ></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 rounded-full bg-background flex items-center justify-center border-8 border-primary/80 shadow-lg">
           <Gift className="w-8 h-8 text-primary" />
         </div>
-        <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 border-t-16 border-l-transparent border-r-transparent border-t-primary" style={{borderTopWidth: '16px'}}></div>
       </div>
-      <Button onClick={spin} disabled={spinning} className="mt-8">
+      <Button onClick={spin} disabled={spinning} className="mt-8 text-lg px-8 py-6 rounded-full shadow-lg">
         {spinning ? 'Spinning...' : 'Spin the Wheel'}
       </Button>
 
