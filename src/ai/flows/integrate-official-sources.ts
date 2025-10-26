@@ -1,90 +1,75 @@
 'use server';
 
 /**
- * @fileOverview An AI agent for generating SEO-optimized financial webpages with integrated references to official sources.
+ * @fileOverview A flow to integrate official sources into a financial webpage.
  *
- * - generateFinancialWebpage - A function that generates a financial webpage based on keywords and SEO requirements.
- * - FinancialWebpageInput - The input type for the generateFinancialWebpage function.
- * - FinancialWebpageOutput - The return type for the generateFinancialWebpage function.
+ * - integrateOfficialSources - A function that integrates official sources into a financial webpage.
+ * - IntegrateOfficialSourcesInput - The input type for the integrateOfficialSources function.
+ * - IntegrateOfficialSourcesOutput - The return type for the integrateOfficialSources function.
  */
 
 import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
 
-const FinancialWebpageInputSchema = z.object({
+const IntegrateOfficialSourcesInputSchema = z.object({
+  webpageContent: z
+    .string()
+    .describe('The HTML content of the financial webpage to integrate official sources into.'),
   primaryKeyword: z.string().describe('The primary keyword for the webpage.'),
-  secondaryKeywords: z.string().describe('Comma-separated secondary keywords for the webpage.'),
+  secondaryKeywords: z
+    .string()
+    .describe('The secondary keywords for the webpage, comma separated.'),
 });
-export type FinancialWebpageInput = z.infer<typeof FinancialWebpageInputSchema>;
+export type IntegrateOfficialSourcesInput = z.infer<
+  typeof IntegrateOfficialSourcesInputSchema
+>;
 
-const FinancialWebpageOutputSchema = z.object({
-  webpageContent: z.string().describe('The complete HTML content of the financial webpage.'),
+const IntegrateOfficialSourcesOutputSchema = z.object({
+  webpageContent: z
+    .string()
+    .describe('The HTML content of the financial webpage with official sources integrated.'),
 });
-export type FinancialWebpageOutput = z.infer<typeof FinancialWebpageOutputSchema>;
+export type IntegrateOfficialSourcesOutput = z.infer<
+  typeof IntegrateOfficialSourcesOutputSchema
+>;
 
-export async function generateFinancialWebpage(input: FinancialWebpageInput): Promise<FinancialWebpageOutput> {
-  return generateFinancialWebpageFlow(input);
+export async function integrateOfficialSources(
+  input: IntegrateOfficialSourcesInput
+): Promise<IntegrateOfficialSourcesOutput> {
+  return integrateOfficialSourcesFlow(input);
 }
 
 const prompt = ai.definePrompt({
-  name: 'financialWebpagePrompt',
+  name: 'integrateOfficialSourcesPrompt',
   input: {
-    schema: FinancialWebpageInputSchema,
+    schema: IntegrateOfficialSourcesInputSchema,
   },
   output: {
-    schema: FinancialWebpageOutputSchema,
+    schema: IntegrateOfficialSourcesOutputSchema,
   },
-  prompt: `You are a professional financial content writer and SEO expert. Generate a high-quality, 100% unique financial webpage targeting the keyword: "{{{primaryKeyword}}}" and including secondary keywords: {{{secondaryKeywords}}}.
+  prompt: `You are an expert financial content writer with a strong focus on building trust and authority.
+  Given the HTML content of a financial webpage, your task is to enhance it by integrating references to official sources like RBI, SEBI, government websites, and major bank portals.
 
-Requirements:
+  The primary keyword for the webpage is: {{{primaryKeyword}}}
+  The secondary keywords for the webpage are: {{{secondaryKeywords}}}
 
-1. SEO & Structure
-   - Title tag with primary keyword.
-   - Meta description with primary and secondary keywords.
-   - Use proper headings (H1, H2, H3) for structure. LLM should tool be capable of inferring context from the keywords to use correct h-tags for each generated heading.
-   - Include internal linking suggestions.
+  Based on the content and keywords, identify opportunities to add value and credibility by citing these official sources. Provide actual, plausible example URLs where appropriate (e.g., a link to an RBI circular or a specific page on a bank's website).
 
-2. Introduction (100-150 words)
-   - Hook the reader.
-   - Mention primary keyword.
-   - Provide value and relevance.
+  Do not remove any existing content. Your goal is to enrich the current content.
 
-3. Main Content (800–1500+ words)
-   - Include eligibility criteria, key details, and rates or examples.
-   - Use tables or bullet points for comparison (e.g., banks, interest rates, plans).
-   - Add actionable tips, calculators, or interactive ideas.
-   - Incorporate secondary keywords naturally.
-   - Write in professional, trustworthy tone suitable for finance.
-   - Include numerical examples where possible.
+  Here is the HTML content of the financial webpage:
+  {{{webpageContent}}}
 
-4. FAQ Section (with answers)
-   - Cover 3–5 most common questions about the topic.
-   - Format as Q&A for Google FAQ schema.
-
-5. Trust Signals
-   - Mention official sources (RBI, SEBI, banks, government websites). Provide actual URL examples in the generated content.
-   - Include disclaimer about financial information.
-   - Suggest author bio snippet (financial expert credentials).
-
-6. Call-to-Action (CTA)
-   - Suggest one or more CTAs: "Check rates", "Use EMI calculator", "Apply now".
-
-7. Content Output
-   - Provide ready-to-publish HTML content or markdown with headings, paragraphs, tables, and CTA placeholders.
-   - Include placeholders for ads if relevant.
-
-Tone: Professional, informative, engaging, trustworthy.
-Audience: Finance-savvy users, people looking to compare loans, credit cards, insurance, or investment options.
-Goal: High CPC, high AdSense revenue, SEO-friendly, fully unique, structured content.
-
-Output the full webpage content, ready for posting.`,
+  Return the modified HTML content with the integrated sources.
+  Ensure the output is valid HTML.
+  `,
 });
 
-const generateFinancialWebpageFlow = ai.defineFlow(
+const integrateOfficialSourcesFlow = ai.defineFlow(
   {
-    name: 'generateFinancialWebpageFlow',
-    inputSchema: FinancialWebpageInputSchema,
-    outputSchema: FinancialWebpageOutputSchema,
+    name: 'integrateOfficialSourcesFlow',
+    inputSchema: IntegrateOfficialSourcesInputSchema,
+    outputSchema: IntegrateOfficialSourcesOutputSchema,
   },
   async input => {
     const {output} = await prompt(input);
