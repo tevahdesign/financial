@@ -46,7 +46,7 @@ const SpinWheelGame = () => {
   };
 
   if (!isMounted) {
-      return null;
+    return null;
   }
 
   return (
