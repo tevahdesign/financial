@@ -29,9 +29,10 @@ interface ContentGeneratorFormProps {
   onGenerationStart: () => void;
   onGenerationEnd: (content: string | undefined) => void;
   isLoading: boolean;
+  onSubmit?: (values: z.infer<typeof formSchema>) => Promise<void>;
 }
 
-export default function ContentGeneratorForm({ onGenerationStart, onGenerationEnd, isLoading }: ContentGeneratorFormProps) {
+export default function ContentGeneratorForm({ onGenerationStart, onGenerationEnd, isLoading, onSubmit }: ContentGeneratorFormProps) {
   const { toast } = useToast();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -41,7 +42,7 @@ export default function ContentGeneratorForm({ onGenerationStart, onGenerationEn
     },
   });
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
+  async function defaultOnSubmit(values: z.infer<typeof formSchema>) {
     onGenerationStart();
     const result = await generateWebpage(values);
     if (result.content) {
@@ -60,6 +61,8 @@ export default function ContentGeneratorForm({ onGenerationStart, onGenerationEn
     }
   }
 
+  const handleSubmit = onSubmit || defaultOnSubmit;
+
   return (
     <Card className="shadow-lg">
       <CardHeader>
@@ -68,7 +71,7 @@ export default function ContentGeneratorForm({ onGenerationStart, onGenerationEn
       </CardHeader>
       <CardContent>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+          <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-6">
             <FormField
               control={form.control}
               name="primaryKeyword"
