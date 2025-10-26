@@ -30,38 +30,39 @@ const prompt = ai.definePrompt({
   name: 'structureFinancialContentPrompt',
   input: {schema: StructureFinancialContentInputSchema},
   output: {schema: StructureFinancialContentOutputSchema},
-  prompt: `You are a professional financial content writer and SEO expert. Generate a high-quality, 100% unique financial article targeting the keyword: "{{{primaryKeyword}}}" and including secondary keywords: {{{secondaryKeywords}}}.
+  prompt: `You are a world-class SEO expert and professional financial content writer. Your goal is to apply a "keyword sniping" strategy to create high-quality, 100% unique financial articles that rank for high-volume keywords.
 
-Requirements:
+  You will target the primary keyword: "{{{primaryKeyword}}}" and strategically include secondary keywords: {{{secondaryKeywords}}}.
 
-1.  **SEO & Structure**
-    *   Title tag with primary keyword.
-    *   Meta description with primary and secondary keywords.
-    *   Use proper headings (H1, H2, H3) for structure.
-    *   Include internal linking suggestions.
+  **Keyword Sniping & SEO Requirements:**
 
-2.  **Introduction (100-150 words)**
-    *   Hook the reader.
-    *   Mention primary keyword.
-    *   Provide value and relevance.
+  1.  **Title & H1:** The primary keyword MUST be at the beginning of the title tag and the H1 tag.
+  2.  **Introduction:** The primary keyword MUST appear within the first 100 words (the first paragraph).
+  3.  **Headings:** The primary keyword MUST be included in at least one H2 subheading.
+  4.  **Keyword Integration:** Incorporate secondary keywords naturally throughout the main content, headings, and lists.
+  5.  **Structure:** Use proper headings (H1, H2, H3) for a clear and crawlable structure.
+  6.  **Internal Linking:** Include placeholders for internal linking suggestions within the content where relevant.
 
-3.  **Main Content (800–1500+ words)**
-    *   Include eligibility criteria, key details, and rates or examples.
-    *   Use tables or bullet points for comparison (e.g., banks, interest rates, plans).
-    *   Add actionable tips, calculators, or interactive ideas.
-    *   Incorporate secondary keywords naturally.
-    *   Write in professional, trustworthy tone suitable for finance.
-    *   Include numerical examples where possible.
+  **Content Requirements:**
 
-4.  **Content Output**
-    *   Provide ready-to-publish HTML content with headings, paragraphs, and tables.
-    *   Do NOT include FAQ sections, CTAs, or disclaimers as they will be added later.
+  1.  **Introduction (100-150 words)**
+      *   Hook the reader and establish immediate relevance.
 
-Tone: Professional, informative, engaging, trustworthy.
-Audience: Finance-savvy users, people looking to compare loans, credit cards, insurance, or investment options.
-Goal: High CPC, high AdSense revenue, SEO-friendly, fully unique, structured content.
+  2.  **Main Content (800–1500+ words)**
+      *   Provide comprehensive details, including eligibility criteria, key features, and numerical examples (rates, etc.).
+      *   Use tables or bullet points for easy comparison (e.g., banks, interest rates, plans).
+      *   Include actionable tips, ideas for calculators, or other interactive elements.
+      *   Maintain a professional, authoritative, and trustworthy tone suitable for the finance industry.
 
-Output the main article content only.
+  3.  **Content Output**
+      *   Provide ready-to-publish HTML content with all required headings, paragraphs, and tables.
+      *   Do NOT include FAQ sections, CTAs, or disclaimers as they will be added in subsequent steps.
+
+  Tone: Professional, informative, engaging, trustworthy.
+  Audience: Finance-savvy users, people looking to compare loans, credit cards, insurance, or investment options.
+  Goal: High CPC, high AdSense revenue, SEO-friendly, fully unique, structured content.
+
+  Output the main article content only, following all keyword sniping and content requirements precisely.
 `,
 });
 
