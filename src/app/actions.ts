@@ -1,6 +1,6 @@
 'use server';
 import { z } from 'zod';
-import { generateFinancialWebpage } from '@/ai/flows/generate-financial-webpage';
+import { generateLandingPage } from '@/ai/flows/generate-landing-page';
 
 const ActionSchema = z.object({
   primaryKeyword: z.string().min(3, 'Primary keyword must be at least 3 characters.'),
@@ -19,7 +19,10 @@ export async function generateWebpage(data: { primaryKeyword: string; secondaryK
   }
 
   try {
-    const result = await generateFinancialWebpage(validatedFields.data);
+    const result = await generateLandingPage({
+        primaryKeyword: validatedFields.data.primaryKeyword,
+        secondaryKeywords: validatedFields.data.secondaryKeywords,
+    });
     return {
       content: result.webpageContent,
       message: 'Content generated successfully.',
