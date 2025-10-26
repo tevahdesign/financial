@@ -31,7 +31,7 @@ const prompt = ai.definePrompt({
   name: 'structureFinancialContentPrompt',
   input: {schema: StructureFinancialContentInputSchema},
   output: {schema: StructureFinancialContentOutputSchema},
-  prompt: `You are a world-class SEO expert and professional financial content writer. Your goal is to apply a "keyword sniping" strategy to create high-quality, 100% unique financial articles that rank for high-volume keywords.
+  prompt: `You are a world-class SEO expert and professional financial content writer. Your goal is to apply a "keyword sniping" strategy to create high-quality, 100% unique financial articles that rank for high-volume keywords and long-tail variations.
 
   You will target the primary keyword: "{{{primaryKeyword}}}" and strategically include secondary keywords: {{{secondaryKeywords}}}.
 
@@ -40,7 +40,7 @@ const prompt = ai.definePrompt({
   1.  **Title & H1:** The primary keyword MUST be at the beginning of the title tag and the H1 tag.
   2.  **Introduction:** The primary keyword MUST appear within the first 100 words (the first paragraph).
   3.  **Headings:** The primary keyword MUST be included in at least one H2 subheading.
-  4.  **Keyword Integration:** Incorporate secondary keywords naturally throughout the main content, headings, and lists.
+  4.  **Long-Tail Keyword Integration:** Identify and naturally incorporate high-quality long-tail keywords related to the primary and secondary keywords throughout the main content, headings, and lists. Think about user questions, problems, and specific needs (e.g., if the keyword is "best credit cards," long-tail keywords could be "best credit cards for travel points 2024" or "how to get a credit card with no credit history").
   5.  **Structure:** Use proper headings (H1, H2, H3) for a clear and crawlable structure.
   6.  **Internal Linking:** Include placeholders for internal linking suggestions within the content where relevant.
 
@@ -58,7 +58,7 @@ const prompt = ai.definePrompt({
   3.  **Ad Integration**
       *   Strategically insert the following ad script at natural breaks in the content (e.g., after a few paragraphs, between sections) to maximize visibility.
       *   Here is the exact script to insert:
-          \`\'\'html
+          \'\'\'html
           <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2885050972904135"
                crossorigin="anonymous"></script>
           <ins class="adsbygoogle"
