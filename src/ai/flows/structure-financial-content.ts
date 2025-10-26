@@ -56,8 +56,20 @@ const prompt = ai.definePrompt({
       *   Maintain a professional, authoritative, and trustworthy tone suitable for the finance industry.
 
   3.  **Ad Integration**
-      *   Strategically insert multiple ad slots within the content. Use HTML comments like \`<!-- AD_SLOT_1 -->\`, \`<!-- AD_SLOT_2 -->\`, etc., as placeholders.
-      *   Place these slots at natural breaks in the content (e.g., after a few paragraphs, between sections) to maximize visibility without disrupting the reading experience. These placeholders will be used for fast-loading, asynchronous ad scripts.
+      *   Strategically insert the following ad script at natural breaks in the content (e.g., after a few paragraphs, between sections) to maximize visibility.
+      *   Here is the exact script to insert:
+          \`\'\'html
+          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2885050972904135"
+               crossorigin="anonymous"></script>
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-format="autorelaxed"
+               data-ad-client="ca-pub-2885050972904135"
+               data-ad-slot="7477563861"></ins>
+          <script>
+               (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
+          \'\'\'
 
   4.  **Content Output**
       *   Provide ready-to-publish HTML content with all required headings, paragraphs, and tables.
