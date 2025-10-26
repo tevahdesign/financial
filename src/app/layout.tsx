@@ -1,10 +1,14 @@
 import type { Metadata } from 'next';
 import { Toaster } from "@/components/ui/toaster"
 import './globals.css';
+import { Inter } from 'next/font/google';
+
+const inter = Inter({ subsets: ['latin'] });
+
 
 export const metadata: Metadata = {
-  title: 'FinanceFlow Writer',
-  description: 'Generate high-quality financial content with AI.',
+  title: 'NerdWallet | Make all the right money moves',
+  description: 'We\'ve gathered our best articles, tools and recommendations to help you reach your financial goals.',
 };
 
 export default function RootLayout({
@@ -14,13 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet" />
-      </head>
-      <body className="font-body antialiased">
+      <body className={inter.className + " antialiased"}>
         {children}
         <Toaster />
       </body>
