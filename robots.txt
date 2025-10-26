@@ -1,0 +1,51 @@
+# robots.txt for https://www.tempmessage.com/
+# Last updated: 2025-09-15
+# Purpose: Control search engine crawling for TempMessage (Disposable Email Service)
+
+# =====================
+# Global Directives
+# =====================
+User-agent: *
+# Allow important resources
+Allow: /$
+Allow: /inbox
+Allow: /contact
+Allow: /about
+Allow: /search$
+Allow: /assets/
+Allow: /static/
+
+# Block non-useful or duplicate content
+Disallow: /admin/
+Disallow: /api/
+Disallow: /auth/
+Disallow: /cgi-bin/
+Disallow: /cart/
+Disallow: /checkout/
+Disallow: /login
+Disallow: /logout
+Disallow: /register
+Disallow: /tmp/
+Disallow: /internal/
+Disallow: /preview/
+
+# =====================
+# Crawl-delay for heavy bots (optional, prevents overload)
+# =====================
+User-agent: AhrefsBot
+Crawl-delay: 5
+User-agent: SemrushBot
+Crawl-delay: 5
+
+# =====================
+# Sitemap locations
+# =====================
+Sitemap: https://www.tempmessage.com/sitemap.xml
+Sitemap: https://www.tempmessage.com/sitemap-index.xml
+
+# =====================
+# Notes:
+# - Avoid blocking CSS/JS/Images critical for rendering (Google requires these).
+# - Public-facing content pages are open for crawling.
+# - Admin, API, checkout, login, and temp/internal routes are blocked.
+# - Use sitemap-index.xml for large-scale programmatic SEO pages (e.g. 1000+ keyword pages).
